@@ -1,0 +1,11 @@
+name: Say Hello
+description: Just being nice
+inputs:
+  greeting-name:
+    required: true
+    type: string
+    description: The name to say hello to
+
+runs:
+  using: node22
+  main: index.js

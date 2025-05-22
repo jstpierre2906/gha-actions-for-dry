@@ -1,0 +1,30 @@
+name: Default workflow
+
+on:
+  workflow_call:
+    inputs:
+      greeting-name:
+        required: true
+        type: string
+        description: The name to say hello to
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install node_modules for action
+        run: npm install
+        working-directory: ./.github/actions/say-hello
+
+      - name: run JS action
+        uses: ./.github/actions/say-hello
+        with:
+          greeting-name: "${{inputs.greeting-name}}"
