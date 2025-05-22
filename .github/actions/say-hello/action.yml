@@ -13,5 +13,5 @@ outputs:
     description: Greeting message
 
 runs:
-  using: node22
+  using: node20
   main: index.js
