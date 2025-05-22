@@ -6,7 +6,7 @@ jobs:
   call-default-wf:
     uses: ./.github/workflows/default.yml
     with:
-      greeting-name: Foo
+      greeting-name: Bar
 
   print-output:
     runs-on: ubuntu-latest
