@@ -16,4 +16,4 @@ jobs:
         id: print-output
         run: |
           echo "Output from called workflow:"
-          echo "Greetings: ${{ needs.call-default-wf.outputs.greeting }}"
+          echo "Greeting message: ${{ needs.call-default-wf.outputs.greeting }}"
