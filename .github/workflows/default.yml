@@ -8,23 +8,40 @@ on:
         type: string
         description: The name to say hello to
 
+    outputs:
+      greeting:
+        value: ${{ jobs.say-hello.outputs.greeting }}
+
+permissions:
+  contents: read
+
 jobs:
-  build:
+  say-hello:
     runs-on: ubuntu-latest
+
+    outputs:
+      greeting: ${{ steps.run-say-hello-js-action.outputs.greeting }}
+
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v3
 
       - name: Setup Node
+        id: setup-node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
 
-      - name: Install node_modules for action
+      - name: Install node_modules for JS action
+        id: install-node-modules-for-js-action
         run: npm install
         working-directory: ./.github/actions/say-hello
 
-      - name: run JS action
+      # Imaginons qu'on a plusieurs workflows qui doivent dire bonjour....
+      # On se crée une action locale pour DRY, sinon WET.
+      - name: Run Say Hello JS action
+        id: run-say-hello-js-action
         uses: ./.github/actions/say-hello
         with:
           greeting-name: "${{inputs.greeting-name}}"

@@ -14,5 +14,12 @@ const Hello = (() => {
   };
 })();
 
+// Input from the reusable workflow step
 const greetingName = core.getInput("greeting-name") || "Foo";
-console.log(Hello.init({ greetingName }).sayHello());
+const greeting = Hello.init({ greetingName }).sayHello();
+
+// For the actions panel workflow log
+console.log(greeting);
+
+// For the reusable workflow step output
+core.setOutput("greeting", greeting);

@@ -1,10 +1,16 @@
 name: Say Hello
+
 description: Just being nice
+
 inputs:
   greeting-name:
     required: true
     type: string
     description: The name to say hello to
+
+outputs:
+  greeting:
+    description: Greeting message
 
 runs:
   using: node22

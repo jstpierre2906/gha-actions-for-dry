@@ -1,0 +1,19 @@
+name: Caller workflow
+
+on: [push]
+
+jobs:
+  call-default-wf:
+    uses: ./.github/workflows/default.yml
+    with:
+      greeting-name: Foo
+
+  print-output:
+    runs-on: ubuntu-latest
+    needs: [call-default-wf]
+    steps:
+      - name: Print output
+        id: print-output
+        run: |
+          echo "Output from called workflow:"
+          echo "Greetings: ${{ needs.call-default-wf.outputs.greeting }}"
